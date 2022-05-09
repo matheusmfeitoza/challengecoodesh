@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Slider } from "@mui/material";
+import MapChart from "./components/MapsChart/MapChart";
 
 const marks = [
   {
@@ -59,7 +60,6 @@ export function App() {
   };
 
   const handleSliderOnChange = (_, value) => {
-    console.log(value);
     const selectedMark = marks.find((mark) => mark.value === value);
     setMark(selectedMark);
   };
@@ -69,20 +69,17 @@ export function App() {
         params: {
           _sort: "date",
           _order: "asc",
-          _limit: 10,
           date_gte: mark.interval.start,
           date_lte: mark.interval.end,
         },
       })
-      .then((r) => console.log(r));
+      .then((r) => setDados(r));
   }, [mark.interval.start, mark.interval.end]);
 
   return (
     <div>
+      <h1>Covid Daily Cases</h1>
       <form onSubmit={handleSubmit}>
-        <button>teste</button>
-        <button>teste</button>
-        <button>teste</button>
         <Slider
           aria-label="Custom marks"
           defaultValue="0"
@@ -93,7 +90,7 @@ export function App() {
           marks={marks}
           onChange={handleSliderOnChange}
         />
-        <button>Buscar dados</button>
+        {dados && <MapChart variantCases={dados} />}
       </form>
     </div>
   );
