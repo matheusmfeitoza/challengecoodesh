@@ -33,7 +33,7 @@ export function App() {
         params: {
           _sort: "date",
           _order: "asc",
-          _limit: 10,
+          _limit: 70,
           date_gte: mark.interval.start,
           date_lte: mark.interval.end,
         },
@@ -49,6 +49,7 @@ export function App() {
           <Slider
             aria-label="Custom marks"
             defaultValue="0"
+            valueLabelFormat={mark.interval.start}
             getAriaValueText={(currentMark) => currentMark.label}
             step={0}
             value={mark.value}

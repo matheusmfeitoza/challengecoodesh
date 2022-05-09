@@ -29,7 +29,7 @@ const MapChart = ({ variantCases }) => {
                   label: "Countries",
                   data: countries.map((d) => ({
                     feature: d,
-                    value: variantCases.data[0].num_sequences,
+                    value: console.log(variantCases.data),
                   })),
                 },
               ],
@@ -51,7 +51,7 @@ const MapChart = ({ variantCases }) => {
           }
         );
       });
-  }, [variantCases]);
+  }, []);
 
   return (
     <div>
