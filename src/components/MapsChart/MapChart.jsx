@@ -1,14 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
 const MapChart = ({ variantCases }) => {
-  const newVariantArray = Array.from(variantCases);
-
-  function variantFilter(variant, pais) {
-    if (variant == pais) {
-      console.log(variant);
-    }
-  }
-
   useEffect(() => {
     fetch("https://unpkg.com/world-atlas/countries-50m.json")
       .then((r) => r.json())
@@ -29,7 +21,7 @@ const MapChart = ({ variantCases }) => {
                   label: "Countries",
                   data: countries.map((d) => ({
                     feature: d,
-                    value: console.log(variantCases.data),
+                    value: console.log(variantCases),
                   })),
                 },
               ],
@@ -51,7 +43,7 @@ const MapChart = ({ variantCases }) => {
           }
         );
       });
-  }, []);
+  }, [variantCases]);
 
   return (
     <div>
