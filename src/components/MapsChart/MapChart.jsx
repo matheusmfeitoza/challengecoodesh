@@ -21,7 +21,7 @@ const MapChart = ({ variantCases }) => {
                   label: "Countries",
                   data: countries.map((d) => ({
                     feature: d,
-                    value: console.log(variantCases),
+                    value: Math.random(),
                   })),
                 },
               ],

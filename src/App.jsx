@@ -9,6 +9,7 @@ import { MapChartStyle } from "./styles/MapChartStyle";
 
 // Functional code
 import { marks } from "./components/Marks/Marks";
+import { ColorizeSharp } from "@mui/icons-material";
 
 export function App() {
   //States
@@ -33,7 +34,6 @@ export function App() {
         params: {
           _sort: "date",
           _order: "asc",
-          _limit: 70,
           date_gte: mark.interval.start,
           date_lte: mark.interval.end,
         },
@@ -50,9 +50,8 @@ export function App() {
             aria-label="Custom marks"
             defaultValue="0"
             valueLabelFormat={mark.interval.start}
-            getAriaValueText={(currentMark) => currentMark.label}
-            step={0}
             value={mark.value}
+            step={25}
             valueLabelDisplay="auto"
             marks={marks}
             onChange={handleSliderOnChange}
