@@ -20,7 +20,7 @@ Este projeto foi realizado para cumprir uma tarefa Front End da Coodesh;
 
 ## Erros conhecidos:
 
-* As vezes o componente `ToolTip` entrega um falor `TRUE`, fix ainda em analise.
+* As vezes o componente `ToolTip` entrega um valor `TRUE`, fix ainda em analise.
 
 ## Resultado
 
@@ -31,6 +31,10 @@ Este projeto foi realizado para cumprir uma tarefa Front End da Coodesh;
 Clone o repositório:
 
 > git clone https://github.com/matheusmfeitoza/challengecoodesh.git
+
+Entre na pasta do desafio:
+
+> cd challengecoodesh
 
 Instalando as dependencias usadas no projeto: 
 
