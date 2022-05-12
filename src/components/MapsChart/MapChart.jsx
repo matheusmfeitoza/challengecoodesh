@@ -1,55 +1,68 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, memo } from "react";
+import _ from "lodash";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
-const MapChart = ({ variantCases }) => {
-  useEffect(() => {
-    fetch("https://unpkg.com/world-atlas/countries-50m.json")
-      .then((r) => r.json())
-      .then((data) => {
-        const countries = ChartGeo.topojson.feature(
-          data,
-          data.objects.countries
-        ).features;
+const MapChart = ({ variantCases, datas, setTipTool }) => {
+  const teste = variantCases.data.filter(
+    (value, index, self) =>
+      index === self.findIndex((t) => t.location === value.location)
+  );
+  const worldMapGeoLocalization =
+    "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-        const chart = new Chart(
-          document.getElementById("canvas").getContext("2d"),
-          {
-            type: "choropleth",
-            data: {
-              labels: countries.map((d) => d.properties.name),
-              datasets: [
-                {
-                  label: "Countries",
-                  data: countries.map((d) => ({
-                    feature: d,
-                    value: Math.random(),
-                  })),
-                },
-              ],
-            },
-            options: {
-              showOutline: true,
-              showGraticule: true,
-              plugins: {
-                legend: {
-                  display: false,
-                },
-              },
-              scales: {
-                xy: {
-                  projection: "equalEarth",
-                },
-              },
-            },
-          }
-        );
-      });
-  }, [variantCases]);
+  const numTotalCasosDeCadaPais = (pais) => {
+    const temp = teste.filter((p, index) => p.location === pais);
+    return temp.reduce(
+      (anterior, atual) => anterior + atual.num_sequences_total,
+      0
+    );
+  };
 
   return (
     <div>
-      <canvas id="canvas"></canvas>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
+        <Geographies geography={worldMapGeoLocalization}>
+          {({ geographies }) =>
+            geographies.map((geo) => {
+              const info = geo.properties.NAME.slice(0, 13);
+              const totalCasos = numTotalCasosDeCadaPais(info);
+              // console.log(geo);
+              return (
+                <Geography
+                  key={geo.properties.ABBREV}
+                  geography={geo}
+                  onMouseEnter={() => {
+                    const total = numTotalCasosDeCadaPais(info);
+                    teste.forEach((pais) =>
+                      pais.location === info
+                        ? setTipTool(
+                            `Pais: ${teste.location || info} | ${
+                              pais.num_sequences_total
+                            }`
+                          )
+                        : null
+                    );
+                  }}
+                  fill={
+                    totalCasos <= 10
+                      ? "#35e876"
+                      : totalCasos < 300
+                      ? "#DFE835"
+                      : totalCasos <= 1500
+                      ? "##EB1A01"
+                      : "##F2C038"
+                  }
+                  stroke={"#fff"}
+                  outline="none"
+                  onMouseLeave={() => setTipTool("")}
+                />
+              );
+            })
+          }
+        </Geographies>
+      </ComposableMap>
     </div>
   );
 };
 
-export default MapChart;
+export default memo(MapChart);

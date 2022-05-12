@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Slider } from "@mui/material";
+import { Slider, Tooltip } from "@mui/material";
 import MapChart from "./components/MapsChart/MapChart";
 
 //StyledComponent Imports
@@ -10,11 +10,13 @@ import { MapChartStyle } from "./styles/MapChartStyle";
 // Functional code
 import { marks } from "./components/Marks/Marks";
 import { ColorizeSharp } from "@mui/icons-material";
+import ReactTooltip from "react-tooltip";
 
 export function App() {
   //States
   const [dados, setDados] = useState(null);
   const [mark, setMark] = useState(marks[0]);
+  const [tipTool, setTipTool] = useState("");
 
   // Submit event
   const handleSubmit = async (event) => {
@@ -48,7 +50,6 @@ export function App() {
         <SliderStyle>
           <Slider
             aria-label="Custom marks"
-            defaultValue="0"
             valueLabelFormat={mark.interval.start}
             value={mark.value}
             step={25}
@@ -57,9 +58,15 @@ export function App() {
             onChange={handleSliderOnChange}
           />
         </SliderStyle>
-        <MapChartStyle>
-          {dados && <MapChart variantCases={dados} />}
-        </MapChartStyle>
+        <div>
+          <MapChartStyle data-tip data-for="tip">
+            {dados && <MapChart variantCases={dados} setTipTool={setTipTool} />}
+          </MapChartStyle>
+
+          <ReactTooltip id="tip" type="info">
+            {tipTool}
+          </ReactTooltip>
+        </div>
       </form>
     </div>
   );

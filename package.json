@@ -17,8 +17,11 @@
     "axios": "^0.27.2",
     "chart.js": "^3.7.1",
     "chartjs-chart-geo": "^3.7.2",
+    "lodash": "^4.17.21",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-simple-maps": "^2.3.0",
+    "react-tooltip": "^4.2.21",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
