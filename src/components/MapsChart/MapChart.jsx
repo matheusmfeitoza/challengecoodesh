@@ -37,7 +37,7 @@ const MapChart = ({ variantCases, datas, setTipTool }) => {
                       pais.location === info
                         ? setTipTool(
                             `Pais: ${teste.location || info} | ${
-                              pais.num_sequences_total
+                              pais.num_sequences_total || 0
                             }`
                           )
                         : null
