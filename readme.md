@@ -24,7 +24,7 @@ Este projeto foi realizado para cumprir uma tarefa Front End da Coodesh;
 
 ## Resultado
 
-
+![resultado](https://raw.githubusercontent.com/matheusmfeitoza/challengecoodesh/main/public/assets/app1.png)
 
 ## Configurando e executando o projeto:
 
