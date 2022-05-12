@@ -24,7 +24,7 @@ Este projeto foi realizado para cumprir uma tarefa Front End da Coodesh;
 
 ## Resultado
 
-<img src="https://imgur.com/gallery/ofoiP84" alt="Covid>
+
 
 ## Configurando e executando o projeto:
 
